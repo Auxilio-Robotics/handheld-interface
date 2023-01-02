@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64072926531",
+    "project_id": "alfred-auxilio",
+    "storage_bucket": "alfred-auxilio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64072926531:android:011b4dda3da6ef75165bf6",
+        "android_client_info": {
+          "package_name": "com.example.handinterface"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64072926531-l1ioijiki74vvogfri30597ler60cfpq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv0eeGUcwC5HPA__ES0GxRR93D5m3NUik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64072926531-l1ioijiki74vvogfri30597ler60cfpq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
