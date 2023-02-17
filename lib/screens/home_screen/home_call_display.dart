@@ -26,16 +26,20 @@ class _HomeDisplayState extends State<HomeDisplay> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                FloatingActionButton(onPressed: () {}, child: Icon(Icons.mic)),
+                FloatingActionButton(
+                    elevation: 0, onPressed: () {}, child: Icon(Icons.mic)),
                 SizedBox(
                   width: 20,
                 ),
                 FloatingActionButton(
-                    onPressed: () {}, child: Icon(Icons.auto_graph_outlined)),
+                    elevation: 0,
+                    onPressed: () {},
+                    child: Icon(Icons.auto_graph_outlined)),
                 SizedBox(
                   width: 20,
                 ),
-                FloatingActionButton(onPressed: () {}, child: Icon(Icons.map)),
+                FloatingActionButton(
+                    elevation: 0, onPressed: () {}, child: Icon(Icons.map)),
               ],
             ),
           ),
@@ -47,35 +51,35 @@ class _HomeDisplayState extends State<HomeDisplay> {
           //       child: VideoCallDisplay()),
           // ),
           Align(
-            alignment: Alignment.bottomLeft,
+            alignment: Alignment.bottomRight,
             child: TeleopJoystick(
               onChanged: (stickPos) =>
-                  TeleopServices.teleopNav(stickPos.x, stickPos.y),
+                  TeleopServices.teleopManipulation(stickPos.x, stickPos.y),
               onRelease: () => TeleopServices.teleopManipulation(0, 0),
               label: "Manipulation",
             ),
           ),
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.bottomLeft,
             child: TeleopJoystick(
               onChanged: (stickPos) =>
                   TeleopServices.teleopNav(stickPos.x, stickPos.y),
-              onRelease: () => TeleopServices.teleopManipulation(0, 0),
+              onRelease: () => TeleopServices.teleopNav(0, 0),
               label: "Navigation",
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: Opacity(
-              opacity: 0.2,
-              child: TeleopJoystick(
-                onChanged: (stickPos) =>
-                    TeleopServices.teleopNav(stickPos.x, stickPos.y),
-                onRelease: () => TeleopServices.teleopManipulation(0, 0),
-                label: "",
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.topCenter,
+          //   child: Opacity(
+          //     opacity: 0.2,
+          //     child: TeleopJoystick(
+          //       onChanged: (stickPos) =>
+          //           TeleopServices.teleopNav(stickPos.x, stickPos.y),
+          //       onRelease: () => TeleopServices.teleopManipulation(0, 0),
+          //       label: "",
+          //     ),
+          //   ),
+          // ),
           // Align(
           //   alignment: Alignment.topLeft,
           //   child: AutonomousCommands(
