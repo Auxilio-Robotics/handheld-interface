@@ -10,7 +10,7 @@ config.json
 .history
 .svn/
 migrate_working_dir/
-
+*constants.dart
 # IntelliJ related
 *.iml
 *.ipr
@@ -43,3 +43,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+lib/services/constants.dart

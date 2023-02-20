@@ -13,7 +13,7 @@ class HomeDisplay extends StatefulWidget {
 
 class _HomeDisplayState extends State<HomeDisplay> {
   bool curstate = false; //
-
+  
   @override
   Widget build(BuildContext context) {
     return Expanded(
