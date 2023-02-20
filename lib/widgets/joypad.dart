@@ -65,7 +65,7 @@ class JoyPad extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 30,
                     child: Icon(
-                  Icons.arrow_left,
+                  Icons.arrow_right,
                 )),
               ),
             ],

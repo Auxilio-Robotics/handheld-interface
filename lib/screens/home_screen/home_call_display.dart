@@ -66,14 +66,30 @@ class _HomeDisplayState extends State<HomeDisplay> {
           Padding(
             padding: const EdgeInsets.all(32.0),
             child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FloatingActionButton(
+                onPressed: () {
+                  setState(() {
+                    curstate = !curstate;
+                  });
+                  TeleopServices.teleopGripper(curstate);
+                  
+                },
+                backgroundColor:(curstate == true)?Colors.green: Colors.red,
+                child: Icon((curstate == false)?Icons.close: Icons.open_in_full ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Align(
               alignment: Alignment.bottomRight,
               child: JoyPad(
                 onPressed: (x, y) {
                   TeleopServices.teleopManipulation(x, y);
                 },
-                onRelease: (){
+                onRelease: () {
                   TeleopServices.teleopManipulation(0, 0);
-                
                 },
               ),
             ),
