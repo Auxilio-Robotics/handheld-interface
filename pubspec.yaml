@@ -19,7 +19,8 @@ dependencies:
   # agora_rtc_engine: ^6.0.4
   
   # agora_uikit: 1.0.4
-  # agora_rtc_engine: 1.0.5
+  agora_rtc_engine: 
+  permission_handler:
   # permission_handler: '^4.4.0+hotfix.2'  
   http: ^0.13.3  
   flutter_launcher_icons: "^0.11.0"

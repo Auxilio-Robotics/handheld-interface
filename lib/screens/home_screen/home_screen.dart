@@ -2,7 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:frontend/screens/home_screen/home_call_display.dart';
-import 'option_buttons.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -54,23 +53,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-
-// OptionButtons(
-//   isNavSelected: isNavSelected,
-//   onTeleopModeToggled: () {
-//     setState(() {
-//       isNavSelected = !isNavSelected;
-//     });
-//   },
-//   isAutoCmdSelected: isAutoMode,
-//   onAutoCommandToggled: () {
-//     setState(() {
-//       isAutoMode = !isAutoMode;
-//     });
-//     FirebaseDatabase.instance
-//         .ref()
-//         .child('state')
-//         .update({'teleopMode': !isAutoMode});
-//   },
-// ),

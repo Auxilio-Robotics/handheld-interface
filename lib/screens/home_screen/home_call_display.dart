@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/services/teleop_services.dart';
 import 'package:frontend/widgets/joypad.dart';
 import 'package:frontend/widgets/joystick.dart';
-import 'package:frontend/widgets/video_call.dart';
 
-import 'auto_cmd.dart';
-import 'joystick_controls.dart';
 
 class HomeDisplay extends StatefulWidget {
   const HomeDisplay({super.key});
