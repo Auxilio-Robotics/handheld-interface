@@ -13,14 +13,14 @@ dependencies:
     sdk: flutter  
   cupertino_icons: ^1.0.2
   flutter_joystick:
-  firebase_core:
-  firebase_database:
+  firebase_core: ^2.6.1
+  firebase_database: ^10.0.13
   fluttertoast:
   # agora_rtc_engine: ^6.0.4
-  permission_handler:
+  
   # agora_uikit: 1.0.4
-  agora_rtc_engine: 1.0.5
-  permission_handler: '^4.4.0+hotfix.2'  
+  # agora_rtc_engine: 1.0.5
+  # permission_handler: '^4.4.0+hotfix.2'  
   http: ^0.13.3  
   flutter_launcher_icons: "^0.11.0"
   wakelock: ^0.6.2

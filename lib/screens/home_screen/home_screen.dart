@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: StreamBuilder(
-          stream: FirebaseDatabase.instance.ref().child('state/botMsg').onValue,
+          stream: FirebaseDatabase.instance.reference().child('state/botMsg').onValue,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               String msg = snapshot.data!.snapshot.value.toString();

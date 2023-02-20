@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/services/teleop_services.dart';
+import 'package:frontend/widgets/joypad.dart';
 import 'package:frontend/widgets/joystick.dart';
 import 'package:frontend/widgets/video_call.dart';
 
@@ -50,22 +51,43 @@ class _HomeDisplayState extends State<HomeDisplay> {
           //       width: MediaQuery.of(context).size.width,
           //       child: VideoCallDisplay()),
           // ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: TeleopJoystick(
-              onChanged: (stickPos) =>
-                  TeleopServices.teleopManipulation(stickPos.x, stickPos.y),
-              onRelease: () => TeleopServices.teleopManipulation(0, 0),
-              label: "Manipulation",
+          // Padding(
+          //   padding: const EdgeInsets.all(32.0),
+          //   child: Align(
+          //     alignment: Alignment.bottomRight,
+          //     child: TeleopJoystick(
+          //       onChanged: (stickPos) =>
+          //           TeleopServices.teleopManipulation(stickPos.x, stickPos.y),
+          //       onRelease: () => TeleopServices.teleopManipulation(0, 0),
+          //       label: "Manipulation",
+          //     ),
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: JoyPad(
+                onPressed: (x, y) {
+                  TeleopServices.teleopManipulation(x, y);
+                },
+                onRelease: (){
+                  TeleopServices.teleopManipulation(0, 0);
+                
+                },
+              ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: TeleopJoystick(
-              onChanged: (stickPos) =>
-                  TeleopServices.teleopNav(stickPos.x, stickPos.y),
-              onRelease: () => TeleopServices.teleopNav(0, 0),
-              label: "Navigation",
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: TeleopJoystick(
+                onChanged: (stickPos) =>
+                    TeleopServices.teleopNav(stickPos.x, stickPos.y),
+                onRelease: () => TeleopServices.teleopNav(0, 0),
+                label: "Navigation",
+              ),
             ),
           ),
         ],
