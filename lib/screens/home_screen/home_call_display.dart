@@ -68,54 +68,6 @@ class _HomeDisplayState extends State<HomeDisplay> {
               label: "Navigation",
             ),
           ),
-          // Align(
-          //   alignment: Alignment.topCenter,
-          //   child: Opacity(
-          //     opacity: 0.2,
-          //     child: TeleopJoystick(
-          //       onChanged: (stickPos) =>
-          //           TeleopServices.teleopNav(stickPos.x, stickPos.y),
-          //       onRelease: () => TeleopServices.teleopManipulation(0, 0),
-          //       label: "",
-          //     ),
-          //   ),
-          // ),
-          // Align(
-          //   alignment: Alignment.topLeft,
-          //   child: AutonomousCommands(
-          //     isAutoCmd: isAutoCmd,
-          //     isNavSelected: isNavSelected,
-          //   ),
-          // ),
-          // Positioned(
-          //   // alignment: Alignment.topRight,
-          //   top: 0,
-          //   left: MediaQuery.of(context).size.width / 3,
-          //   child: Row(
-          //     children: [
-          //       Text("Autonoomus"),
-          //       Switch(
-          //         value: curstate,
-          //         onChanged: (val) {
-          //           curstate = !curstate;
-          //           setState(() {});
-          //         },
-          //         activeColor: Colors.red,
-          //         inactiveThumbColor: Colors.red,
-          //       ),
-          //       Text("Remote control"),
-          //     ],
-          //   ),
-          // )
-          // Align(
-          //     alignment: Alignment.topRight,
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: IconButton(
-          //           onPressed: () {},
-          //           color: Colors.grey,
-          //           icon: Icon(Icons.mic)),
-          //     )),
         ],
       ),
     );
