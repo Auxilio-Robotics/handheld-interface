@@ -6,6 +6,7 @@
 .DS_Store
 .atom/
 .buildlog/
+*agora_config.dart
 config.json
 .history
 .svn/
