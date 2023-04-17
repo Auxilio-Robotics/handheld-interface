@@ -23,36 +23,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      body: StreamBuilder(
-          stream: FirebaseDatabase.instance.reference().child('state/botMsg').onValue,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              String msg = snapshot.data!.snapshot.value.toString();
-              if (msg != "None") {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Fluttertoast.showToast(
-                    msg: msg,
-                    toastLength: Toast.LENGTH_LONG,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Color.fromARGB(130, 0, 0, 0),
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
-                  FirebaseDatabase.instance
-                      .ref()
-                      .child('state')
-                      .update({'botMsg': "None"});
-                });
-              }
-            }
-            return SafeArea(
-              child: HomeDisplay(),
-              // child: 
-            );
-          }),
-    );
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        body: SafeArea(
+          child: HomeDisplay(),
+          // child:
+        ));
   }
 }

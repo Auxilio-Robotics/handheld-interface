@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
 class JoyPad extends StatelessWidget {
-  final Function(double, double) onPressed;
-  final Function onRelease;
-  const JoyPad({super.key, required this.onPressed, required this.onRelease});
+  Function(double, double) onPressed;
+  Function onRelease;
+  String heading;
+  JoyPad({super.key, required this.onPressed, required this.onRelease, required this.heading});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 230,
       width: 200,
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.all(Radius.circular(15)),
-      //   color: Colors.black54,
-      // ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.red.withAlpha(120),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(heading),
+          SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

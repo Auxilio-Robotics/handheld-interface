@@ -5,7 +5,6 @@ import 'package:frontend/widgets/joypad.dart';
 import 'package:frontend/widgets/joystick.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-
 class HomeDisplay extends StatefulWidget {
   const HomeDisplay({super.key});
 
@@ -16,20 +15,39 @@ class HomeDisplay extends StatefulWidget {
 class _HomeDisplayState extends State<HomeDisplay> {
   bool curstate = false; //
   bool isAutonomous = false;
-  
+
+  String globalstate = "IDLE";
+  String localstate = "IDLE";
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseDatabase.instance.ref().child("operation_mode").get().then((value)  
-    {
-      
+    FirebaseDatabase.instance.ref().child("operation_mode").get().then((value) {
       setState(() {
         isAutonomous = (value.value == "AUTONOMOUS");
         print("GOT VALUE FROM FIREBASE = " + value.value.toString());
       });
     });
-    
+
+    FirebaseDatabase.instance
+        .ref()
+        .child("global_state")
+        .onValue
+        .listen((event) {
+      setState(() {
+        globalstate = event.snapshot.value.toString();
+      });
+    });
+    FirebaseDatabase.instance
+        .ref()
+        .child("local_state")
+        .onValue
+        .listen((event) {
+      setState(() {
+        globalstate = event.snapshot.value.toString();
+      });
+    });
   }
 
   @override
@@ -37,52 +55,67 @@ class _HomeDisplayState extends State<HomeDisplay> {
     return Expanded(
       child: Stack(
         children: [
-          Container(child: JoinChannelVideo(), color: Colors.black,),
+          (isAutonomous)
+              ? Container()
+              : Container(
+                  child: JoinChannelVideo(),
+                  color: Colors.black,
+                ),
           Align(
             alignment: Alignment.topCenter,
             child: FloatingActionButton(
-                      elevation: 0,
-                      onPressed: () {
-                        setState(() {
-                          isAutonomous = !isAutonomous;
-                        });
-                        FirebaseServices.switchModes(isAutonomous);
-                      },
-                      child: Text(isAutonomous? "Auto": "Teleop")),
+                elevation: 0,
+                onPressed: () {
+                  setState(() {
+                    isAutonomous = !isAutonomous;
+                  });
+                  FirebaseServices.switchModes(isAutonomous);
+                },
+                child: Text(isAutonomous ? "Auto" : "Teleop")),
           ),
-          // Align(
-          //   alignment: Alignment.topCenter,
-          //   child: Row(
-          //     mainAxisSize: MainAxisSize.min,
-          //     children: [
-          //       FloatingActionButton(
-          //           elevation: 0, onPressed: () {}, child: Icon(Icons.home)),
-          //       SizedBox(
-          //         width: 20,
-          //       ),
-                
-          //       // SizedBox(
-          //       //   width: 20,
-          //       // ),
-          //       // FloatingActionButton(
-          //       //     elevation: 0, onPressed: () {}, child: Icon(Icons.map)),
-          //     ],
-          //   ),
-          // ),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+                width: 150,
+                height: 50,
+                // color: Colors.black.withAlpha(120),
+                decoration: BoxDecoration(
+                  color: Colors.black.withAlpha(120),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      // Text("Robot Metrics",
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        "Global State: " + globalstate,
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "Local State: " + localstate,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                )),
+          ),
           Padding(
             padding: const EdgeInsets.all(32.0),
             child: Align(
-              alignment: Alignment.bottomCenter,  
+              alignment: Alignment.bottomCenter,
               child: FloatingActionButton(
                 onPressed: () {
                   setState(() {
                     curstate = !curstate;
                   });
                   FirebaseServices.teleopGripper(curstate);
-                  
                 },
-                backgroundColor:(curstate == true)?Colors.green: Colors.red,
-                child: Icon((curstate == false)?Icons.close: Icons.open_in_full ),
+                backgroundColor: (curstate == true) ? Colors.green : Colors.red,
+                child: Icon(
+                    (curstate == false) ? Icons.close : Icons.open_in_full),
               ),
             ),
           ),
@@ -91,6 +124,7 @@ class _HomeDisplayState extends State<HomeDisplay> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: JoyPad(
+                heading : "Manipulation",
                 onPressed: (x, y) {
                   FirebaseServices.teleopManipulation(x, y);
                 },
@@ -104,14 +138,29 @@ class _HomeDisplayState extends State<HomeDisplay> {
             padding: const EdgeInsets.all(32.0),
             child: Align(
               alignment: Alignment.bottomLeft,
-              child: TeleopJoystick(
-                onChanged: (stickPos) =>
-                    FirebaseServices.teleopNav(stickPos.x, stickPos.y),
-                onRelease: () => FirebaseServices.teleopNav(0, 0),
-                label: "Navigation",
+              child: JoyPad(
+                heading : "Navigation",
+                onPressed: (x, y) {
+                  FirebaseServices.teleopNav(x, y);
+                },
+                onRelease: () {
+                  FirebaseServices.teleopNav(0, 0);
+                },
               ),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.all(32.0),
+          //   child: Align(
+          //     alignment: Alignment.bottomLeft,
+          //     child: TeleopJoystick(
+          //       onChanged: (stickPos) =>
+          //           FirebaseServices.teleopNav(stickPos.x, stickPos.y),
+          //       onRelease: () => FirebaseServices.teleopNav(0, 0),
+          //       label: "Navigation",
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
