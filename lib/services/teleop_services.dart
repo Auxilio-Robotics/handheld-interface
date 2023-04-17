@@ -6,13 +6,14 @@ abstract class FirebaseServices {
     double x,
   ) async {
     final DatabaseReference db =
-        FirebaseDatabase.instance.ref().child("teleop_commands/");
-    final double xVal = double.parse(x.toStringAsFixed(5));
+        FirebaseDatabase.instance.ref();
+    double xVal = double.parse(x.toStringAsFixed(5));
+    xVal -= 180;
     print(db.path);
 
-    db.set({
-      "manipulator/yaw_position": xVal,
-      'last_command_stamp': DateTime.now().millisecondsSinceEpoch/1000.0
+    db.update({
+      "teleop_commands/manipulator/yaw_position": xVal,
+      'teleop_commands/last_command_stamp': DateTime.now().millisecondsSinceEpoch/1000.0
     });
   }
 
@@ -24,8 +25,8 @@ abstract class FirebaseServices {
     print(db.path);
 
     db.update({
-      "teleop_commands/mobile_base/vel_x": xVal,
-      "teleop_commands/mobile_base/vel_y": yVal,
+      "teleop_commands/mobile_base/velx": xVal,
+      "teleop_commands/mobile_base/veltheta": yVal,
       "teleop_commands/last_command_stamp": DateTime.now().millisecondsSinceEpoch/1000.0
     });
   }

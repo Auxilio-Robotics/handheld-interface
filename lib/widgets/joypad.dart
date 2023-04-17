@@ -4,7 +4,8 @@ class JoyPad extends StatelessWidget {
   Function(double, double) onPressed;
   Function onRelease;
   String heading;
-  JoyPad({super.key, required this.onPressed, required this.onRelease, required this.heading});
+  double valtosend = 0.05;
+  JoyPad({super.key, required this.onPressed, required this.onRelease, required this.heading, required this.valtosend});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class JoyPad extends StatelessWidget {
             children: [
               GestureDetector(
                 onTapDown: (adf) {
-                  onPressed(0, 0.05);
+                  onPressed(0, valtosend);
                 },
                 onTapUp: (asdf) {
                   onRelease();
@@ -44,7 +45,7 @@ class JoyPad extends StatelessWidget {
             children: [
               GestureDetector(
                 onTapDown: (adf) {
-                  onPressed(0.05, 0);
+                  onPressed(valtosend, 0);
                 },
                 onTapUp: (asdf) {
                   onRelease();
@@ -60,7 +61,7 @@ class JoyPad extends StatelessWidget {
               ),
               GestureDetector(
                 onTapDown: (adf) {
-                  onPressed(-0.05, 0);
+                  onPressed(-valtosend, 0);
                 },
                 onTapUp: (asdf) {
                   onRelease();
@@ -78,7 +79,7 @@ class JoyPad extends StatelessWidget {
             children: [
               GestureDetector(
                 onTapDown: (adf) {
-                  onPressed(0, -0.05);
+                  onPressed(0, -valtosend);
                 },
                 onTapUp: (asdf) {
                   onRelease();
