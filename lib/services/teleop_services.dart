@@ -7,7 +7,7 @@ abstract class FirebaseServices {
   ) async {
     final DatabaseReference db =
         FirebaseDatabase.instance.ref();
-    double xVal = double.parse(x.toStringAsFixed(5));
+    double xVal = 360 - double.parse(x.toStringAsFixed(5));
     xVal -= 180;
     print(db.path);
 
