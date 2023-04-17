@@ -52,7 +52,7 @@ class _HomeDisplayState extends State<HomeDisplay> {
                   setState(() {
                     curstate = !curstate;
                   });
-                  TeleopServices.teleopGripper(curstate);
+                  FirebaseServices.teleopGripper(curstate);
                   
                 },
                 backgroundColor:(curstate == true)?Colors.green: Colors.red,
@@ -66,10 +66,10 @@ class _HomeDisplayState extends State<HomeDisplay> {
               alignment: Alignment.bottomRight,
               child: JoyPad(
                 onPressed: (x, y) {
-                  TeleopServices.teleopManipulation(x, y);
+                  FirebaseServices.teleopManipulation(x, y);
                 },
                 onRelease: () {
-                  TeleopServices.teleopManipulation(0, 0);
+                  FirebaseServices.teleopManipulation(0, 0);
                 },
               ),
             ),
@@ -80,8 +80,8 @@ class _HomeDisplayState extends State<HomeDisplay> {
               alignment: Alignment.bottomLeft,
               child: TeleopJoystick(
                 onChanged: (stickPos) =>
-                    TeleopServices.teleopNav(stickPos.x, stickPos.y),
-                onRelease: () => TeleopServices.teleopNav(0, 0),
+                    FirebaseServices.teleopNav(stickPos.x, stickPos.y),
+                onRelease: () => FirebaseServices.teleopNav(0, 0),
                 label: "Navigation",
               ),
             ),
