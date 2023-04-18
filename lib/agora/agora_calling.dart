@@ -30,9 +30,7 @@ class _State extends State<JoinChannelVideo> {
   void initState() {
     super.initState();
     _controller = TextEditingController(text: config.channelId);
-
     _initEngine();
-    // 
   }
 
   @override
@@ -52,6 +50,7 @@ class _State extends State<JoinChannelVideo> {
       appId: config.appId,
     ));
 
+  
     _engine.registerEventHandler(RtcEngineEventHandler(
       onError: (ErrorCodeType err, String msg) {
         logSink.log('[onError] err: $err, msg: $msg');
@@ -106,7 +105,7 @@ class _State extends State<JoinChannelVideo> {
     await _engine.joinChannel(
       token: config.token,
       channelId: config.channelId,
-      uid: config.uid,
+      uid: 0,
       options: ChannelMediaOptions(
         channelProfile: _channelProfileType,
         clientRoleType: ClientRoleType.clientRoleBroadcaster,
@@ -127,47 +126,51 @@ class _State extends State<JoinChannelVideo> {
 
   @override
   Widget build(BuildContext context) {
+    print("REMOTE IDS: $remoteUid");
     if(!_isReadyPreview) {
       return Container();
     }
-    return Stack(
-      children: [
-        Container(
-          color: Colors.grey,
-          width: MediaQuery.of(context).size.width,
-          child: AgoraVideoView(
-            controller: VideoViewController.remote(
-              rtcEngine: _engine,
-              canvas: VideoCanvas(uid: 2),
-              connection: RtcConnection(channelId: 'robotdisplay'),
-              useFlutterTexture: _isUseFlutterTexture,
-              useAndroidSurfaceView: _isUseAndroidSurfaceView,
+    return Container(
+      color: Colors.white,
+      child: Stack(
+        children: [
+          if (remoteUid.isNotEmpty) Container(
+            color: Colors.grey,
+            width: MediaQuery.of(context).size.width,
+            child: AgoraVideoView(
+              controller: VideoViewController.remote(
+                rtcEngine: _engine,
+                canvas: VideoCanvas(uid: 1),
+                connection: RtcConnection(channelId: 'robot_display'),
+                useFlutterTexture: _isUseFlutterTexture,
+                useAndroidSurfaceView: _isUseAndroidSurfaceView,
+              ),
             ),
           ),
-        ),
-      
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
-          child: Positioned(
-            top:0,
-            right:0 ,
-            child: Container(
-              width: 200,
-              height: 150,
-              child: AgoraVideoView(
-                controller: VideoViewController(
-                  rtcEngine: _engine,
-                  canvas: const VideoCanvas(uid: 0),
-                  useFlutterTexture: _isUseFlutterTexture,
-                  useAndroidSurfaceView: _isUseAndroidSurfaceView,
+        // my video 
+          if(isJoined) Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10))
+            ),
+            child: Positioned(
+              top:0,
+              right:0 ,
+              child: Container(
+                width: 200,
+                height: 150,
+                child: AgoraVideoView(
+                  controller: VideoViewController(
+                    rtcEngine: _engine,
+                    canvas: const VideoCanvas(uid: 0),
+                    useFlutterTexture: _isUseFlutterTexture,
+                    useAndroidSurfaceView: _isUseAndroidSurfaceView,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
