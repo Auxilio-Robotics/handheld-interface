@@ -113,9 +113,18 @@ class _State extends State<JoinChannelVideo> {
     );
   }
 
+  // Future<void> _leaveChannel() async {
+  //   await _engine.leaveChannel();
+  // }
   Future<void> _leaveChannel() async {
-    await _engine.leaveChannel();
-  }
+  await _engine.leaveChannel();
+  _isReadyPreview = false; // Reset the video preview flag
+  setState(() {
+    isJoined = false;
+    remoteUid.clear();
+  });
+}
+
 
   Future<void> _switchCamera() async {
     await _engine.switchCamera();
@@ -167,7 +176,13 @@ class _State extends State<JoinChannelVideo> {
                   ),
                 ),
               ),
-            ),
+            )
+            Positioned(
+            bottom: 16.0,
+            right: 16.0,
+            child: ElevatedButton(
+            onPressed: _leaveChannel,
+            child: Text('End Call')),
           ),
         ],
       ),
