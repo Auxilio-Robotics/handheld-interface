@@ -7,7 +7,7 @@ import 'package:frontend/widgets/joystick.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:agora_uikit/agora_uikit.dart';
 import 'package:frontend/agora/agora_config.dart' as config;
-
+import '../../constants.dart';
 class HomeDisplay extends StatefulWidget {
   const HomeDisplay({super.key});
 
@@ -44,7 +44,7 @@ final AgoraClient client = AgoraClient(
 
     FirebaseDatabase.instance
         .ref()
-        .child("alfred_fvd/operation_mode")
+        .child("$root/status/operation_mode")
         .get()
         .then((value) {
       setState(() {

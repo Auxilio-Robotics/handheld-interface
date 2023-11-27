@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import '../constants.dart';
 
 // publish last timestamp
 abstract class FirebaseServices {
@@ -10,10 +11,10 @@ abstract class FirebaseServices {
     double xVal = 360 - double.parse(x.toStringAsFixed(5));
     xVal -= 180;
     print(db.path);
-
+    
     db.update({
-      "alfred_fvd/teleop_commands/manipulator/yaw_position": xVal,
-      'alfred_fvd/teleop_commands/last_command_stamp': DateTime.now().millisecondsSinceEpoch/1000.0
+      "${root}/teleop_commands/manipulator/yaw_position": xVal,
+      '${root}/teleop_commands/last_command_stamp': DateTime.now().millisecondsSinceEpoch/1000.0
     });
   }
 
@@ -25,9 +26,9 @@ abstract class FirebaseServices {
     print(db.path);
 
     db.update({
-      "alfred_fvd/teleop_commands/mobile_base/velx": xVal,
-      "alfred_fvd/teleop_commands/mobile_base/veltheta": yVal,
-      "alfred_fvd/teleop_commands/last_command_stamp": DateTime.now().millisecondsSinceEpoch/1000.0
+      "${root}/teleop_commands/mobile_base/velx": xVal,
+      "${root}/teleop_commands/mobile_base/veltheta": yVal,
+      "${root}/teleop_commands/last_command_stamp": DateTime.now().millisecondsSinceEpoch/1000.0
     });
   }
 
@@ -36,9 +37,9 @@ abstract class FirebaseServices {
     final double xVal = double.parse(x.toStringAsFixed(5));
     final double yVal = double.parse(y.toStringAsFixed(5));
     db.update({
-      "alfred_fvd/teleop_commands/manipulator/vel_lift": yVal,
-      "alfred_fvd/teleop_commands/manipulator/vel_extend": xVal,
-      'alfred_fvd/teleop_commands/last_command_stamp':
+      "${root}/teleop_commands/manipulator/vel_lift": yVal,
+      "${root}/teleop_commands/manipulator/vel_extend": xVal,
+      '${root}/teleop_commands/last_command_stamp':
           DateTime.now().millisecondsSinceEpoch/1000.0
     });
   }
@@ -46,8 +47,8 @@ abstract class FirebaseServices {
   static Future<void> teleopGripper(bool open) async {
     final DatabaseReference db = FirebaseDatabase.instance.ref();
     db.update({
-      "alfred_fvd/teleop_commands/manipulator/gripper_open": open,
-      'alfred_fvd/teleop_commands/last_command_stamp':
+      "${root}/teleop_commands/manipulator/gripper_open": open,
+      '${root}/teleop_commands/last_command_stamp':
           DateTime.now().millisecondsSinceEpoch/1000.0
     });
   }
@@ -58,11 +59,11 @@ abstract class FirebaseServices {
     print(isAutonomous);
     if (!isAutonomous) {
       db.update({
-        "alfred_fvd/operation_mode": "TELEOPERATION",
+        "${root}/status/operation_mode": "TELEOPERATION",
       });
     } else {
       db.update({
-        "alfred_fvd/operation_mode": "AUTONOMOUS",
+        "${root}/status/operation_mode": "AUTONOMOUS",
       });
     }
   }

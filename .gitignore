@@ -10,7 +10,7 @@ config.json
 .history
 .svn/
 migrate_working_dir/
-*constants.dart
+
 # IntelliJ related
 *.iml
 *.ipr

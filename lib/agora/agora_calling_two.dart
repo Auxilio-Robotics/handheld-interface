@@ -31,6 +31,7 @@ class _State extends State<JoinChannelVideo> {
   @override
   void initState() {
     super.initState();
+    
     initAgora();
   }
 
@@ -41,6 +42,7 @@ class _State extends State<JoinChannelVideo> {
   // Build your layout
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
